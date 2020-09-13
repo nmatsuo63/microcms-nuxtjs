@@ -11,14 +11,11 @@
 <script>
 import axios from "axios";
 export default {
-  async asyncData() {
+  async asyncData({ $config }) {
     const { data } = await axios.get(
       // your-service-id部分は自分のサービスidに置き換えてください
       "https://nao-private.microcms.io/api/v1/blog",
-      {
-        // your-api-key部分は自分のapi-keyに置き換えてください
-        headers: { "X-API-KEY": "3b09a9c2-8efd-40b2-89db-56411b93e0f6" }
-      }
+      { headers: { "X-API-KEY": $config.apiKey } }
     );
     return data;
   }

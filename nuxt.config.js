@@ -1,11 +1,19 @@
+require("dotenv").config({ debug: true });
+const { API_KEY } = process.env;
+
 import axios from "axios";
 
 export default {
+  privateRuntimeConfig: {
+    apiKey: API_KEY
+  },
+  publicRuntimeConfig: {
+    apiKey: process.env.NODE_ENV !== "production" ? API_KEY : undefined
+  },
   /*
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
-   */
-  mode: "universal",
+   */ mode: "universal",
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -55,11 +63,14 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+  env: {
+    API_KEY
+  },
   generate: {
     async routes() {
       const pages = await axios
         .get("https://nao-private.microcms.io/api/v1/blog?limit=100", {
-          headers: { "X-API-KEY": "3b09a9c2-8efd-40b2-89db-56411b93e0f6" }
+          headers: { "X-API-KEY": API_KEY }
         })
         .then(res =>
           res.data.contents.map(content => ({

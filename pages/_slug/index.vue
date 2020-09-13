@@ -8,13 +8,15 @@
 
 <script>
 import axios from "axios";
+// console.log($config.apiKey);
+// console.log("ss");
 
 export default {
-  async asyncData({ params }) {
+  async asyncData({ params, $config }) {
     const { data } = await axios.get(
       `https://nao-private.microcms.io/api/v1/blog/${params.slug}`,
       {
-        headers: { "X-API-KEY": "3b09a9c2-8efd-40b2-89db-56411b93e0f6" }
+        headers: { "X-API-KEY": $config.apiKey }
       }
     );
     return data;

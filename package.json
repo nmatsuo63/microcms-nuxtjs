@@ -14,5 +14,7 @@
     "nuxt": "^2.14.0",
     "sass-loader": "^10.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
